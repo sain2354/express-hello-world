@@ -8,6 +8,9 @@ on:
 jobs:
   decir-hola:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     steps:
       - name: mostrar mensaje
@@ -17,3 +20,11 @@ jobs:
           curl -X POST 'https://webhook.site/892f2749-aba3-44c8-af63-04640edf7a85' \
           -H 'content-type: application/json' \
           -d '{"nombre": "Canchumanyaj"}'
+      - name: Checkout repository
+        run: actions/checkout@v4
+      - name: Logearnos en GHCR
+        run: echo "sainsito135531" | docker login ghcr.io -u Canchumanya --password-stdin
+      - name: Crear Contenedor
+        run: docker build . -t ghcr.io/Canchumanya/express-image:latest
+      - name: Desplegar imagen
+        run: docker push ghcr.io/Canchumanya/express-image:latest
