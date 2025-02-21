@@ -23,8 +23,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Logearnos en GHCR
-        run: echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u canchumanya --password-stdin
+        run: echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u sain2354 --password-stdin
       - name: Crear imagen
-        run: docker build . -t ghcr.io/canchumanya/express-image:latest
+        run: docker build . -t ghcr.io/sain2354/express-image:latest
       - name: Desplegar imagen
-        run: docker push ghcr.io/canchumanya/express-image:latest
+        run: docker push ghcr.io/sain2354/express-image:latest
