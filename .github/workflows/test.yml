@@ -1,4 +1,4 @@
-name: Prueba numero 1
+name: Prueba num 1
 
 on:
   push:
@@ -11,20 +11,20 @@ jobs:
     permissions:
       contents: read
       packages: write
-
+    environment: produccion
     steps:
-      - name: mostrar mensaje
-        run: echo "Hola Mundo"
-      - name: Enviar Petición
+      - name: Mostrar mensaje
+        run: echo "Hola mundo"
+      - name: Enviar Peticion
         run: |
           curl -X POST 'https://webhook.site/892f2749-aba3-44c8-af63-04640edf7a85' \
           -H 'content-type: application/json' \
-          -d '{"nombre": "Canchumanyaj"}'
+          -d '{"nombre": "Canchumanya"}'
       - name: Checkout repository
-        run: actions/checkout@v4
+        uses: actions/checkout@v4
       - name: Logearnos en GHCR
-        run: echo "sainsito135531" | docker login ghcr.io -u Canchumanya --password-stdin
-      - name: Crear Contenedor
+        run: echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u Canchumanya --password-stdin
+      - name: Crear imagen
         run: docker build . -t ghcr.io/Canchumanya/express-image:latest
       - name: Desplegar imagen
         run: docker push ghcr.io/Canchumanya/express-image:latest
